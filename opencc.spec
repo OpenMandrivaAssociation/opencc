@@ -1,12 +1,12 @@
 Name: opencc
 Version: 0.1.0
-Release: %mkrel 1
+Release: %mkrel 2
 Summary: Simplified-Traditional Chinese Conversion
 License: ASL 2.0
 Group: System/Libraries
 URL: http://code.google.com/p/open-chinese-convert/
 Source0: http://open-chinese-convert.googlecode.com/files/%{name}-%{version}.tar.gz
-BuildRoot:  %{_tmppath}/%{name}-%{version}-%{release}-root
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
 OpenCC - Simplified-Traditional Chinese Conversion.
@@ -15,6 +15,7 @@ OpenCC - Simplified-Traditional Chinese Conversion.
 %package -n %libname
 Summary: Runtime library for OpenCC
 Group: System/Libraries
+Requires: %name = %version-%release
 
 %description -n %libname
 Runtime Libraries for OpenCC.
