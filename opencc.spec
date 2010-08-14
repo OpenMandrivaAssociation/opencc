@@ -1,6 +1,6 @@
 Name: opencc
 Version: 0.1.0
-Release: %mkrel 5
+Release: %mkrel 6
 Summary: Simplified-Traditional Chinese Conversion
 License: ASL 2.0
 Group: System/Libraries
@@ -20,12 +20,13 @@ Requires: %name = %version-%release
 %description -n %libname
 Runtime Libraries for OpenCC.
 
-%define develname %mklibname -d opensc
+%define develname %mklibname -d %{name}
 %package -n %develname
 Summary: Development tools for OpenCC
 Group: Development/Other
 Requires: %{libname} = %{version}-%{release}
 Provides: %{name}-devel = %{version}-%{release}
+Obsoletes: %{_lib}opensc-devel < %{version}-%{release}
 
 %description -n %develname
 Development tools for OpenCC.
