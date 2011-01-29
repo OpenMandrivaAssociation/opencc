@@ -1,12 +1,15 @@
 Name: opencc
-Version: 0.1.2
-Release: %mkrel 2
+Version: 0.2.0
+Release: %mkrel 1
 Summary: Simplified-Traditional Chinese Conversion
 License: ASL 2.0
 Group: System/Libraries
-URL: http://code.google.com/p/open-chinese-convert/
-Source0: http://open-chinese-convert.googlecode.com/files/%{name}-%{version}.tar.gz
+URL: http://code.google.com/p/opencc
+Source0: http://opencc.googlecode.com/files/%{name}-%{version}.tar.gz
+Patch0: opencc-0.2.0-lib64.patch
+Patch1: opencc-0.2.0-static-lib.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+BuildRequires: cmake
 
 %description
 OpenCC - Simplified-Traditional Chinese Conversion.
@@ -33,14 +36,16 @@ Development tools for OpenCC.
 
 %prep
 %setup -q
+%patch0 -p0 -b .lib64
+%patch1 -p0 -b .static
 
 %build
-%configure2_5x --disable-static --enable-shared
+%cmake
 %make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%makeinstall_std
+%makeinstall_std -C build
 
 %find_lang %{name}
 
@@ -61,6 +66,5 @@ rm -rf $RPM_BUILD_ROOT
 %files -n %{develname}
 %defattr(-,root,root,-)
 %{_includedir}/*
-%{_libdir}/*.la
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/*.pc
