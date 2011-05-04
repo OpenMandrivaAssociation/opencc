@@ -1,6 +1,6 @@
 Name: opencc
 Version: 0.2.0
-Release: %mkrel 1
+Release: %mkrel 2
 Summary: Simplified-Traditional Chinese Conversion
 License: ASL 2.0
 Group: System/Libraries
