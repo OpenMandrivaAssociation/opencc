@@ -1,37 +1,37 @@
-Name: opencc
-Version: 0.2.0
-Release: %mkrel 2
-Summary: Simplified-Traditional Chinese Conversion
-License: ASL 2.0
-Group: System/Libraries
-URL: http://code.google.com/p/opencc
-Source0: http://opencc.googlecode.com/files/%{name}-%{version}.tar.gz
-Patch0: opencc-0.2.0-lib64.patch
-Patch1: opencc-0.2.0-static-lib.patch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-BuildRequires: cmake
+%define major 1
+%define libname %mklibname %{name} %{major}
+%define develname %mklibname -d %{name}
+
+Name:		opencc
+Version:	0.2.0
+Release:	5
+Summary:	Simplified-Traditional Chinese Conversion
+License:	ASL 2.0
+Group:		System/Libraries
+URL:		http://code.google.com/p/opencc
+Source0:	http://opencc.googlecode.com/files/%{name}-%{version}.tar.gz
+Patch0:		opencc-0.2.0-lib64.patch
+Patch1:		opencc-0.2.0-static-lib.patch
+BuildRequires:	cmake
 
 %description
 OpenCC - Simplified-Traditional Chinese Conversion.
 
-%define libname %mklibname opencc 1
-%package -n %libname
-Summary: Runtime library for OpenCC
-Group: System/Libraries
-Requires: %name = %version-%release
+%package -n %{libname}
+Summary:	Runtime library for OpenCC
+Group:		System/Libraries
+Requires:	%{name} = %{version}-%{release}
 
-%description -n %libname
+%description -n %{libname}
 Runtime Libraries for OpenCC.
 
-%define develname %mklibname -d %{name}
-%package -n %develname
-Summary: Development tools for OpenCC
-Group: Development/Other
-Requires: %{libname} = %{version}-%{release}
-Provides: %{name}-devel = %{version}-%{release}
-Obsoletes: %{_lib}opensc-devel
+%package -n %{develname}
+Summary:	Development tools for OpenCC
+Group:		Development/Other
+Requires:	%{libname} = %{version}-%{release}
+Provides:	%{name}-devel = %{version}-%{release}
 
-%description -n %develname
+%description -n %{develname}
 Development tools for OpenCC.
 
 %prep
@@ -44,27 +44,55 @@ Development tools for OpenCC.
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std -C build
 
-%find_lang %{name}
-
-%clean
-rm -rf %{buildroot}
-
-%files -f %{name}.lang
-%defattr(-,root,root,-)
+%files
 %doc AUTHORS COPYING README
 %{_bindir}/*
 %{_datadir}/opencc
 %{_datadir}/man/man1/*
 
 %files -n %{libname}
-%defattr(-,root,root,-)
-%{_libdir}/lib*.so.1*
+%{_libdir}/lib*.so.%{major}*
 
 %files -n %{develname}
-%defattr(-,root,root,-)
 %{_includedir}/*
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/*.pc
+
+
+%changelog
+* Wed May 04 2011 Oden Eriksson <oeriksson@mandriva.com> 0.2.0-2mdv2011.0
++ Revision: 666949
+- mass rebuild
+
+* Sat Jan 29 2011 Funda Wang <fwang@mandriva.org> 0.2.0-1
++ Revision: 633990
+- new version 0.2.0
+
+* Wed Oct 06 2010 Funda Wang <fwang@mandriva.org> 0.1.2-2mdv2011.0
++ Revision: 583522
+- osbsoletes old package
+
+* Fri Oct 01 2010 Funda Wang <fwang@mandriva.org> 0.1.2-1mdv2011.0
++ Revision: 582329
+- update to new version 0.1.2
+
+* Sat Aug 14 2010 Funda Wang <fwang@mandriva.org> 0.1.1-2mdv2011.0
++ Revision: 569521
+- opensc is another package
+- new version 0.1.1
+- wrong devel name provided
+
+* Sat Aug 14 2010 Funda Wang <fwang@mandriva.org> 0.1.0-5mdv2011.0
++ Revision: 569515
+- rebuild
+
+* Sun Aug 01 2010 Funda Wang <fwang@mandriva.org> 0.1.0-4mdv2011.0
++ Revision: 564187
+- rebuild
+- rebuild
+- requires main package for data files
+- import opencc
+
+
