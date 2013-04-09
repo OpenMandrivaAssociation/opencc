@@ -4,7 +4,7 @@
 
 Name:		opencc
 Version:	0.2.0
-Release:	5
+Release:	6
 Summary:	Simplified-Traditional Chinese Conversion
 License:	ASL 2.0
 Group:		System/Libraries
@@ -42,6 +42,9 @@ Development tools for OpenCC.
 %build
 %cmake
 %make
+
+# Drop double slashes from .pc file, if any
+sed -i 's#libdir=${prefix}/#libdir=${prefix}#' opencc.pc
 
 %install
 %makeinstall_std -C build
