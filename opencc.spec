@@ -1,14 +1,14 @@
 %define major 1
 %define libname %mklibname %{name} %{major}
-%define develname %mklibname -d %{name}
+%define devname %mklibname -d %{name}
 
+Summary:	Simplified-Traditional Chinese Conversion
 Name:		opencc
 Version:	0.2.0
 Release:	6
-Summary:	Simplified-Traditional Chinese Conversion
 License:	ASL 2.0
 Group:		System/Libraries
-URL:		http://code.google.com/p/opencc
+Url:		http://code.google.com/p/opencc
 Source0:	http://opencc.googlecode.com/files/%{name}-%{version}.tar.gz
 Patch0:		opencc-0.2.0-lib64.patch
 Patch1:		opencc-0.2.0-static-lib.patch
@@ -25,13 +25,13 @@ Requires:	%{name} = %{version}-%{release}
 %description -n %{libname}
 Runtime Libraries for OpenCC.
 
-%package -n %{develname}
+%package -n %{devname}
 Summary:	Development tools for OpenCC
 Group:		Development/Other
 Requires:	%{libname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 
-%description -n %{develname}
+%description -n %{devname}
 Development tools for OpenCC.
 
 %prep
@@ -53,49 +53,13 @@ sed -i 's#libdir=${prefix}/#libdir=${prefix}#' opencc.pc
 %doc AUTHORS COPYING README
 %{_bindir}/*
 %{_datadir}/opencc
-%{_datadir}/man/man1/*
+%{_mandir}/man1/*
 
 %files -n %{libname}
-%{_libdir}/lib*.so.%{major}*
+%{_libdir}/libopencc.so.%{major}*
 
-%files -n %{develname}
+%files -n %{devname}
 %{_includedir}/*
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/*.pc
-
-
-%changelog
-* Wed May 04 2011 Oden Eriksson <oeriksson@mandriva.com> 0.2.0-2mdv2011.0
-+ Revision: 666949
-- mass rebuild
-
-* Sat Jan 29 2011 Funda Wang <fwang@mandriva.org> 0.2.0-1
-+ Revision: 633990
-- new version 0.2.0
-
-* Wed Oct 06 2010 Funda Wang <fwang@mandriva.org> 0.1.2-2mdv2011.0
-+ Revision: 583522
-- osbsoletes old package
-
-* Fri Oct 01 2010 Funda Wang <fwang@mandriva.org> 0.1.2-1mdv2011.0
-+ Revision: 582329
-- update to new version 0.1.2
-
-* Sat Aug 14 2010 Funda Wang <fwang@mandriva.org> 0.1.1-2mdv2011.0
-+ Revision: 569521
-- opensc is another package
-- new version 0.1.1
-- wrong devel name provided
-
-* Sat Aug 14 2010 Funda Wang <fwang@mandriva.org> 0.1.0-5mdv2011.0
-+ Revision: 569515
-- rebuild
-
-* Sun Aug 01 2010 Funda Wang <fwang@mandriva.org> 0.1.0-4mdv2011.0
-+ Revision: 564187
-- rebuild
-- rebuild
-- requires main package for data files
-- import opencc
-
 
