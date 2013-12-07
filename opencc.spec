@@ -5,7 +5,7 @@
 Summary:	Simplified-Traditional Chinese Conversion
 Name:		opencc
 Version:	0.2.0
-Release:	9
+Release:	10
 License:	ASL 2.0
 Group:		System/Libraries
 Url:		http://code.google.com/p/opencc
