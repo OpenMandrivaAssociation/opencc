@@ -4,7 +4,7 @@
 
 Name:		opencc
 Version:	0.2.0
-Release:	6
+Release:	7
 Summary:	Simplified-Traditional Chinese Conversion
 License:	ASL 2.0
 Group:		System/Libraries
