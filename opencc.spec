@@ -1,17 +1,17 @@
 %define major 1
 %define libname %mklibname %{name} %{major}
 %define devname %mklibname -d %{name}
+%define static %mklibname -d -s %{name}
 
 Summary:	Simplified-Traditional Chinese Conversion
 Name:		opencc
-Version:	0.2.0
+Version:	0.4.3
 Release:	12
 License:	ASL 2.0
 Group:		System/Libraries
 Url:		http://code.google.com/p/opencc
 Source0:	http://opencc.googlecode.com/files/%{name}-%{version}.tar.gz
-Patch0:		opencc-0.2.0-lib64.patch
-Patch1:		opencc-0.2.0-static-lib.patch
+Patch0:		opencc-0.3.0-fixes-cmake.patch
 BuildRequires:	cmake
 
 %description
@@ -34,12 +34,21 @@ Provides:	%{name}-devel = %{version}-%{release}
 %description -n %{devname}
 Development tools for OpenCC.
 
+%package -n	%{static}
+Summary:	Development tools for OpenCC
+Group:		Development/Other
+Requires:	%{name}-devel = %{version}-%{release}
+Provides:	%{name}-static-devel = %{version}-%{release}
+
+%description -n %{devname}
+Development tools for OpenCC.
+
 %prep
 %setup -q
-%patch0 -p0 -b .lib64
-%patch1 -p0 -b .static
+%apply_patches
 
 %build
+export LD_LIBRARY_PATH=`$pwd`/build/src/:$LD_LIBRARY_PATH
 %cmake
 %make
 
@@ -50,7 +59,7 @@ sed -i 's#libdir=${prefix}/#libdir=${prefix}#' opencc.pc
 %makeinstall_std -C build
 
 %files
-%doc AUTHORS COPYING README
+%doc AUTHORS
 %{_bindir}/*
 %{_datadir}/opencc
 %{_mandir}/man1/*
@@ -63,3 +72,5 @@ sed -i 's#libdir=${prefix}/#libdir=${prefix}#' opencc.pc
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/*.pc
 
+%files -n %{static}
+%{_libdir}/*.a
