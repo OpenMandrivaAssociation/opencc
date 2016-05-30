@@ -1,0 +1,12 @@
+--- OpenCC-ver.1.0.3/data/CMakeLists.txt.0001	2015-07-23 05:22:06.000000000 +0800
++++ OpenCC-ver.1.0.3/data/CMakeLists.txt	2015-08-04 19:41:25.567724181 +0800
+@@ -110,7 +110,8 @@
+     COMMENT
+       "Building ${DICT}.ocd"
+     COMMAND
+-      ${OPENCC_DICT_BIN}
++      LD_LIBRARY_PATH=${CMAKE_BINARY_DIR}/src:ENV{LD_LIBRARY_PATH}
++      ${CMAKE_BINARY_DIR}/src/tools/${OPENCC_DICT_BIN}
+         --input ${DICT_${DICT}_INPUT}
+         --output ${DICT}.ocd
+         --from text
