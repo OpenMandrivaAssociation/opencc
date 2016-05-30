@@ -46,7 +46,6 @@ Development tools for OpenCC.
 %setup -q
 
 %build
-export LD_LIBRARY_PATH=`$pwd`/build/src/:$LD_LIBRARY_PATH
 %cmake
 %make
 
