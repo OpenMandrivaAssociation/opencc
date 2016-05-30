@@ -11,6 +11,8 @@ License:	ASL 2.0
 Group:		System/Libraries
 Url:		http://code.google.com/p/opencc
 Source0:	http://opencc.googlecode.com/files/%{name}-%{version}.tar.gz
+Patch0: opencc-fixes-cmake.patch
+Patch1: opencc-1.0.3-ld_path.patch
 BuildRequires:	cmake
 
 %description
@@ -44,6 +46,7 @@ Development tools for OpenCC.
 
 %prep
 %setup -q
+%apply_patches
 
 %build
 %cmake
