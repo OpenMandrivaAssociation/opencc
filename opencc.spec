@@ -41,6 +41,8 @@ Development tools for OpenCC.
 %apply_patches
 
 %build
+export CC=gcc
+export CXX=g++
 %cmake
 %make
 
