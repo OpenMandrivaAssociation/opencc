@@ -57,6 +57,7 @@ sed -i 's#libdir=${prefix}/#libdir=${prefix}#' opencc.pc
 
 %files -n %{libname}
 %{_libdir}/libopencc.so.%{major}*
+%{_libdir}/lib*.so.1.0.0
 
 %files -n %{devname}
 %{_includedir}/*
