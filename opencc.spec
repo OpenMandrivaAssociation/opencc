@@ -2,6 +2,7 @@
 %define libname %mklibname %{name} %{major}
 %define devname %mklibname -d %{name}
 %define static %mklibname -d -s %{name}
+%define  _disable_lto 1
 
 Summary:	Simplified-Traditional Chinese Conversion
 Name:		opencc
@@ -11,8 +12,8 @@ License:	ASL 2.0
 Group:		System/Libraries
 Url:		http://code.google.com/p/opencc
 Source0:	http://opencc.googlecode.com/files/%{name}-%{version}.tar.gz
-Patch0: opencc-fixes-cmake.patch
-Patch1: opencc-1.0.3-ld_path.patch
+Patch0:		opencc-fixes-cmake.patch
+Patch1:		opencc-1.0.3-ld_path.patch
 BuildRequires:	cmake
 
 %description
