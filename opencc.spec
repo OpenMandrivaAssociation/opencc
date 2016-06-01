@@ -1,7 +1,6 @@
-%define major 1
+%define major 2
 %define libname %mklibname %{name} %{major}
 %define devname %mklibname -d %{name}
-%define static %mklibname -d -s %{name}
 %define  _disable_lto 1
 
 Summary:	Simplified-Traditional Chinese Conversion
@@ -32,15 +31,7 @@ Summary:	Development tools for OpenCC
 Group:		Development/Other
 Requires:	%{libname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
-
-%description -n %{devname}
-Development tools for OpenCC.
-
-%package -n	%{static}
-Summary:	Development tools for OpenCC
-Group:		Development/Other
-Requires:	%{name}-devel = %{version}-%{release}
-Provides:	%{name}-static-devel = %{version}-%{release}
+%rename		%{_lib}opencc-static-devel
 
 %description -n %{devname}
 Development tools for OpenCC.
@@ -63,7 +54,6 @@ sed -i 's#libdir=${prefix}/#libdir=${prefix}#' opencc.pc
 %doc AUTHORS
 %{_bindir}/*
 %{_datadir}/opencc
-%{_mandir}/man1/*
 
 %files -n %{libname}
 %{_libdir}/libopencc.so.%{major}*
@@ -72,6 +62,3 @@ sed -i 's#libdir=${prefix}/#libdir=${prefix}#' opencc.pc
 %{_includedir}/*
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/*.pc
-
-%files -n %{static}
-%{_libdir}/*.a
