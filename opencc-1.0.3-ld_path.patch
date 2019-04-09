@@ -1,8 +1,10 @@
---- OpenCC-ver.1.0.3/data/CMakeLists.txt.0001	2015-07-23 05:22:06.000000000 +0800
-+++ OpenCC-ver.1.0.3/data/CMakeLists.txt	2015-08-04 19:41:25.567724181 +0800
-@@ -110,7 +110,8 @@
-     COMMENT
-       "Building ${DICT}.ocd"
+Index: OpenCC-ver.1.0.5/data/CMakeLists.txt
+===================================================================
+--- OpenCC-ver.1.0.5/data/CMakeLists.txt
++++ OpenCC-ver.1.0.5/data/CMakeLists.txt	2018-04-13 10:34:55.500627251 +0200
+@@ -112,7 +112,8 @@
+     COMMAND
+       ${CMAKE_COMMAND} -E copy "$<TARGET_FILE:libopencc>" "$<TARGET_FILE_DIR:${OPENCC_DICT_BIN}>"
      COMMAND
 -      ${OPENCC_DICT_BIN}
 +      LD_LIBRARY_PATH=${CMAKE_BINARY_DIR}/src:ENV{LD_LIBRARY_PATH}
