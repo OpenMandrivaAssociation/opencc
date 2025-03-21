@@ -1,19 +1,22 @@
-%define major 2
-%define libname %mklibname opencc %{major}
+%define major 1.1
+%define oldlibname %mklibname opencc 2
+%define libname %mklibname opencc
 %define develname %mklibname -d %{name}
 
 Name:		opencc
-Version:	1.0.5
-Release:	5
+Version:	1.1.9
+Release:	1
 Summary:	Simplified-Traditional Chinese Conversion
 License:	ASL 2.0
 Group:		System/Internationalization
 URL:		https://github.com/BYVoid/OpenCC
 Source0:	https://github.com/BYVoid/OpenCC/archive/ver.%{version}/OpenCC-ver.%{version}.tar.gz
-Patch0:		opencc-fixes-cmake.patch
 Patch1:		opencc-1.0.3-ld_path.patch
-Patch2:		opencc-1.0.3-CVE-2018-16982.patch
-BuildRequires:	cmake
+BuildSystem:	cmake
+BuildRequires:	python%{pyver}dist(pybind11)
+BuildRequires:	pkgconfig(RapidJSON)
+BuildOption:	-DUSE_SYSTEM_PYBIND11:BOOL=ON
+BuildOption:	-DUSE_SYSTEM_RAPIDJSON:BOOL=ON
 
 %description
 OpenCC is an opensource project for conversion between Traditional Chinese and
@@ -24,6 +27,7 @@ among Mainland China, Taiwan and Hong kong.
 Summary:	Runtime library for OpenCC
 Group:		System/Libraries
 Requires:	%{name}
+%rename %{oldlibname}
 
 %description -n %{libname}
 Runtime Libraries for OpenCC.
@@ -37,27 +41,17 @@ Provides:	%{name}-devel = %{version}-%{release}
 %description -n %{develname}
 Development tools for OpenCC.
 
-%prep
-%setup -qn OpenCC-ver.%{version}
-%autopatch -p1
-
-%build
-%cmake
-%make_build
-
-%install
-%make_install -C build
-
 %files
 %doc AUTHORS
 %{_bindir}/*
 %{_datadir}/opencc
 
 %files -n %{libname}
-%{_libdir}/lib*.so.%{major}
-%{_libdir}/lib*.so.1.0.0
+%{_libdir}/lib*.so.%{major}*
 
 %files -n %{develname}
 %{_includedir}/*
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/*.pc
+%{_libdir}/cmake/opencc
+%{_libdir}/libmarisa.a

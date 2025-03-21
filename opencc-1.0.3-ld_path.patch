@@ -1,14 +1,13 @@
-Index: OpenCC-ver.1.0.5/data/CMakeLists.txt
-===================================================================
---- OpenCC-ver.1.0.5/data/CMakeLists.txt
-+++ OpenCC-ver.1.0.5/data/CMakeLists.txt	2018-04-13 10:34:55.500627251 +0200
-@@ -112,7 +112,8 @@
-     COMMAND
-       ${CMAKE_COMMAND} -E copy "$<TARGET_FILE:libopencc>" "$<TARGET_FILE_DIR:${OPENCC_DICT_BIN}>"
+diff -up OpenCC-ver.1.1.9/data/CMakeLists.txt.1~ OpenCC-ver.1.1.9/data/CMakeLists.txt
+--- OpenCC-ver.1.1.9/data/CMakeLists.txt.1~	2025-03-21 22:58:10.611215852 +0100
++++ OpenCC-ver.1.1.9/data/CMakeLists.txt	2025-03-21 22:59:22.594333564 +0100
+@@ -136,7 +136,8 @@ foreach(DICT ${DICTS})
+     COMMENT
+       "Building ${DICT}.ocd2"
      COMMAND
 -      ${OPENCC_DICT_BIN}
 +      LD_LIBRARY_PATH=${CMAKE_BINARY_DIR}/src:ENV{LD_LIBRARY_PATH}
 +      ${CMAKE_BINARY_DIR}/src/tools/${OPENCC_DICT_BIN}
          --input ${DICT_${DICT}_INPUT}
-         --output ${DICT}.ocd
+         --output ${DICT}.ocd2
          --from text
