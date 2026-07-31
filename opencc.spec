@@ -4,7 +4,7 @@
 %define develname %mklibname -d %{name}
 
 Name:		opencc
-Version:	1.1.9
+Version:	1.4.1
 Release:	1
 Summary:	Simplified-Traditional Chinese Conversion
 License:	ASL 2.0
